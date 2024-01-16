@@ -9,6 +9,7 @@ import (
 type AuthRepository interface {
 	UsernameExist(username string) bool
 	Register(req *models.User) error
+	UserByUsername(username string) (*models.User, error)
 }
 
 type authRepository struct {
@@ -33,4 +34,11 @@ func (r *authRepository) Register(user *models.User) error {
 	err := r.db.Create(&user).Error
 
 	return err
+}
+
+func (r *authRepository) UserByUsername(username string) (*models.User, error) {
+	var user models.User
+	err := r.db.First(&user, "username = ?", username).Error
+
+	return &user, err
 }
