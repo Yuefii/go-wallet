@@ -1,4 +1,4 @@
-package error
+package errorhandler
 
 type NotFoundError struct {
 	Message string

@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"go-wallet/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -15,6 +16,7 @@ func LoadDB() {
 	if err != nil {
 		panic("failed to connect database.")
 	}
+	db.AutoMigrate(models.User{})
 
 	DB = db
 }
